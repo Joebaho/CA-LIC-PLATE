@@ -56,10 +56,58 @@ CI/CD pipeline for automated deployments
 
 ## 📂 Project Structure
 
-app/            Flask application
-docker/         Dockerfile
-terraform/      Infrastructure modules
-scripts/        Automation scripts
+```
+
+CA-LIC-PLATE/
+├── app/
+│   ├── app.py
+│   ├── plate_validator.py
+│   ├── requirements.txt 
+│   └── templates/
+│       └── index.html
+├── Docker/
+│   └──  Dockerfile
+├── scripts/
+│   ├── build.sh
+│   ├── deploy.sh
+|   └── setup.sh 
+│           
+├── terraform/
+│       ├── backend.tf
+│       ├── locals.tf
+|       |-- main.tf 
+│       ├── outputs.tf
+│       ├── providers.tf
+│       ├── terraform.tfvars
+│       └── variables.tf
+│       └── versions.tf
+│       └── modules/
+│              ├── codepipeline/  
+│                  ├── main.tf
+│                  ├── outputs.tf
+|                  |-- variables.tf 
+│                  └── buildspec.tpl
+│              ├── ecs/
+│                  ├── main.tf
+│                  ├── outputs.tf
+│                  ├── variables
+│                  └── task-definition.tf
+│              └── networking
+│                  ├── main.tf.tf
+│                  ├── providers.tf
+│                  ├── outputs.tf
+│                  └── variables.tf
+│
+│
+│--- .env
+│
+|--- buildspec.yml
+│
+|--- pipeline.yml
+|
+└── README.md
+
+```
 
 ## 🚀 Deployment Instructions
 
@@ -67,26 +115,16 @@ scripts/        Automation scripts
 
 ```bash
 git clone https://github.com/Joebaho/CA-LIC-PLATE.git
-cd "CA LIC PLATE"
+cd "CA-LIC-PLATE"
 ```
 
-### 🌐 Step 2: Prepare Terraform Backend
-
-Create an S3 bucket for Terraform state:
-
-aws s3 mb s3://my-terraform-state-bucket
-
-
-Update terraform/backend.tf accordingly.
-
-### 🔧 Step 3: Configure Variables
+### 🔧 Step 2: Configure Variables
 
 Edit:
 
 terraform/terraform.tfvars
 
-
-Set:
+Set values in the variables:
 
 AWS region
 
@@ -96,7 +134,9 @@ CIDR blocks
 
 GitHub repo info (for pipeline)
 
-### 🚀 Step 4: Deploy Infrastructure
+Dockerhub info
+
+### 🚀 Step 3: Deploy Infrastructure
 
 ```bash
 cd terraform
@@ -106,7 +146,7 @@ terraform plan
 terraform apply --auto-approve
 ```
 
-### 🐳 Step 5: Build & Push Docker Image
+### 🐳 Step 4: Build & Push Docker Image
 
 ```bash
 cd ..
@@ -114,7 +154,7 @@ chmod +x scripts/build.sh
 ./scripts/build.sh
 ```
 
-### 🔁 Step 6: Deploy Application
+### 🔁 Step 5: Deploy Application
 
 ```bash
 chmod +x scripts/deploy.sh
@@ -129,14 +169,13 @@ Trigger ECS deployment
 
 Pipeline will handle updates
 
-### 🌍 Step 7: Access the App
+### 🌍 Step 6: Access the App
 
 Retrieve ALB DNS name from Terraform outputs:
 
 terraform output alb_dns_name
 
-
-Open in browser.
+Copy the value, Open in browser and paste that there you will get the webpage
 
 ## 🧹 Destruction
 
@@ -174,6 +213,29 @@ Flask Documentation
 
 Pull requests are welcome. For major changes, please open an issue first.
 
+## 👨‍💻 Author
+
+**Joseph Mbatchou**
+
+• DevOps / Cloud / Platform  Engineer   
+• Content Creator / AWS Builder
+
+## 🔗 Connect With Me
+
+🌐 Website: [https://platform.joebahocloud.com](https://platform.joebahocloud.com)
+
+💼 LinkedIn: [https://www.linkedin.com/in/josephmbatchou/](https://www.linkedin.com/in/josephmbatchou/)
+
+🐦 X/Twitter: [https://www.twitter.com/Joebaho237](https://www.twitter.com/Joebaho237)
+
+▶️ YouTube: [https://www.youtube.com/@josephmbatchou5596](https://www.youtube.com/@josephmbatchou5596)
+
+🔗 Github: [https://github.com/Joebaho](https://github.com/Joebaho)
+
+📦 Dockerhub: [https://hub.docker.com/u/joebaho2](https://hub.docker.com/u/joebaho2)
+
+---
+
 ## 📄 License
 
-MIT License
+This project is licensed under the MIT License — see the LICENSE file for details.

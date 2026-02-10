@@ -122,13 +122,13 @@ variable "ecr_scan_on_push" {
 variable "github_owner" {
   description = "GitHub repository owner"
   type        = string
-  default     = "yourusername"
+  default     = "Joebaho"
 }
 
 variable "github_repo_name" {
   description = "GitHub repository name"
   type        = string
-  default     = "california-plate-validator"
+  default     = "CA-LIC-PLATE"
 }
 
 variable "github_branch" {
@@ -171,7 +171,7 @@ variable "build_compute_type" {
 variable "dockerhub_username" {
   description = "DockerHub username for pushing images"
   type        = string
-  default     = ""
+  default     = "joebaho2"
 }
 
 variable "dockerhub_password" {
@@ -223,7 +223,7 @@ variable "enable_alb_ssl" {
 variable "certificate_arn" {
   description = "ARN of SSL certificate for ALB"
   type        = string
-  default     = ""
+  default     = "arn:aws:acm:us-west-2:546310954125:certificate/327520bc-1081-4377-8fb4-1065dd31f6cb"
 }
 
 # Autoscaling Configuration

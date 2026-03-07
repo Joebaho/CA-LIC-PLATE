@@ -72,22 +72,9 @@ resource "aws_dynamodb_table" "terraform_state_lock" {
 
 # ECR Repository
 resource "aws_ecr_repository" "app_repo" {
-<<<<<<< HEAD
   name         = local.ecr_repository_name
   force_delete = true
 
-=======
-  name = local.ecr_repository_name
-<<<<<<< HEAD
-<<<<<<< HEAD
-  force_delete = true
-=======
->>>>>>> 9bc682b (entering all neccessaries files)
-=======
-  force_delete = true
->>>>>>> 266732c (all modifications done on scripts)
-  
->>>>>>> 76bf70b ( another changes added)
   image_tag_mutability = var.ecr_image_tag_mutability
 
   image_scanning_configuration {

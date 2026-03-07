@@ -108,45 +108,15 @@ resource "aws_route_table" "private" {
   }
 
   tags = merge(var.tags, {
-<<<<<<< HEAD
     Name = var.single_nat_gateway ? "${var.project_name}-private-rt-${var.environment}" : "${var.project_name}-private-rt-${count.index + 1}-${var.environment}"
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    Name = var.single_nat_gateway ? "${var.project_name}-private-rt-${var.environment}" : "${var.project_name}-private-rt-${count.index + 1}-${var.environment}"
-=======
-    Name = var.single_nat_gateway  
-      "${var.project_name}-private-rt-${var.environment}" 
-      "${var.project_name}-private-rt-${count.index + 1}-${var.environment}"
->>>>>>> 9bc682b (entering all neccessaries files)
-=======
-    Name = var.single_nat_gateway ? "${var.project_name}-private-rt-${var.environment}" : "${var.project_name}-private-rt-${count.index + 1}-${var.environment}"
->>>>>>> 266732c (all modifications done on scripts)
->>>>>>> 76bf70b ( another changes added)
   })
 }
 
 resource "aws_route_table_association" "private" {
   count = length(var.private_subnet_cidrs)
-<<<<<<< HEAD
 
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = var.single_nat_gateway ? aws_route_table.private[0].id : aws_route_table.private[count.index].id
-=======
-  
-  subnet_id = aws_subnet.private[count.index].id
-<<<<<<< HEAD
-<<<<<<< HEAD
-  route_table_id = var.single_nat_gateway ? aws_route_table.private[0].id : aws_route_table.private[count.index].id
-=======
-  route_table_id = var.single_nat_gateway  
-    aws_route_table.private[0].id : 
-    aws_route_table.private[count.index].id
->>>>>>> 9bc682b (entering all neccessaries files)
-=======
-  route_table_id = var.single_nat_gateway ? aws_route_table.private[0].id : aws_route_table.private[count.index].id
->>>>>>> 266732c (all modifications done on scripts)
->>>>>>> 76bf70b ( another changes added)
 }
 
 # Security Groups
@@ -310,16 +280,4 @@ resource "aws_vpc_endpoint" "secretsmanager" {
   tags = merge(var.tags, {
     Name = "${var.project_name}-secretsmanager-endpoint-${var.environment}"
   })
-<<<<<<< HEAD
 }
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 9bc682b (entering all neccessaries files)
-=======
-}
->>>>>>> 266732c (all modifications done on scripts)
->>>>>>> 76bf70b ( another changes added)

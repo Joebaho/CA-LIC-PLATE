@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, Response
 from plate_validator import validator
 import json
-import random
 
 app = Flask(__name__)
 
@@ -67,8 +66,8 @@ def health():
 def get_formats():
     """Get all supported plate formats"""
     return jsonify({
-        "formats": validator.plate_formats,
-        "total_formats": len(validator.plate_formats)
+        "formats": validator.get_format_catalog(),
+        "total_formats": len(validator.patterns)
     })
 
 # Server-Sent Events for real-time validation

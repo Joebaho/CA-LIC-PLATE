@@ -107,6 +107,12 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
+variable "enable_vpc_config" {
+  description = "Whether to run CodeBuild inside VPC"
+  type        = bool
+  default     = false
+}
+
 variable "aws_account_id" {
   description = "AWS account ID"
   type        = string

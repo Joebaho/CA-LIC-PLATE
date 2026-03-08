@@ -266,6 +266,7 @@ module "codepipeline" {
   vpc_id                  = module.networking.vpc_id
   subnet_ids              = module.networking.private_subnet_ids
   security_group_ids      = [module.networking.security_group_ids.default]
+  enable_vpc_config       = false
   aws_account_id          = data.aws_caller_identity.current.account_id # ✅ Use data source
 
   tags = local.common_tags

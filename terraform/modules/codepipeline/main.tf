@@ -111,14 +111,19 @@ resource "aws_iam_role_policy" "codebuild" {
       {
         Effect = "Allow"
         Action = [
+          "ec2:AssignPrivateIpAddresses",
           "ec2:CreateNetworkInterface",
+          "ec2:CreateNetworkInterfacePermission",
           "ec2:DeleteNetworkInterface",
+          "ec2:DescribeAvailabilityZones",
           "ec2:DescribeDhcpOptions",
           "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeSecurityGroupRules",
           "ec2:DescribeRouteTables",
           "ec2:DescribeSecurityGroups",
           "ec2:DescribeSubnets",
           "ec2:DescribeVpcs",
+          "ec2:UnassignPrivateIpAddresses",
           "secretsmanager:GetSecretValue"
         ]
         Resource = ["*"]
@@ -293,10 +298,13 @@ resource "aws_codebuild_project" "main" {
     })
   }
 
-  vpc_config {
-    vpc_id             = var.vpc_id
-    subnets            = var.subnet_ids
-    security_group_ids = var.security_group_ids
+  dynamic "vpc_config" {
+    for_each = var.enable_vpc_config ? [1] : []
+    content {
+      vpc_id             = var.vpc_id
+      subnets            = var.subnet_ids
+      security_group_ids = var.security_group_ids
+    }
   }
 
   tags = merge(var.tags, {
